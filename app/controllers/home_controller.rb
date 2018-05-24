@@ -10,6 +10,7 @@ class HomeController < ApplicationController
       end
 
       @tenant = Tenant.current_tenant
+      @condominios = Condominio.by_plan_and_tenant(@tenant.id)
       params[:tenant_id] = @tenant.id
     end
   end

@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180503015116) do
+ActiveRecord::Schema.define(version: 20180522010714) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "condominios", force: :cascade do |t|
+    t.string "nome"
+    t.string "endereco"
+    t.string "sindico"
+    t.string "telefone"
+    t.string "email"
+    t.bigint "tenant_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tenant_id"], name: "index_condominios_on_tenant_id"
+  end
 
   create_table "members", force: :cascade do |t|
     t.bigint "tenant_id"
@@ -93,6 +105,7 @@ ActiveRecord::Schema.define(version: 20180503015116) do
     t.index ["tenant_id"], name: "index_users_on_tenant_id"
   end
 
+  add_foreign_key "condominios", "tenants"
   add_foreign_key "members", "tenants"
   add_foreign_key "members", "users"
   add_foreign_key "tenants", "tenants"

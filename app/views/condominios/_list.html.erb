@@ -1,0 +1,48 @@
+<%- model_class = Condominio -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<% if @condominios.size > 0 %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th><%= model_class.human_attribute_name(:nome) %></th>
+        <th><%= model_class.human_attribute_name(:endereco) %></th>
+        <th><%= model_class.human_attribute_name(:sindico) %></th>
+        <th><%= model_class.human_attribute_name(:telefone) %></th>
+        <th><%= model_class.human_attribute_name(:email) %></th>
+        <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @condominios.each do |condominio| %>
+        <tr>
+          <td><%= link_to condominio.nome, tenant_condominio_path(condominio,
+                  tenant_id: @tenant.id), class: 'main-link' %></td>
+          <td><%= condominio.endereco %></td>
+          <td><%= condominio.sindico %></td>
+          <td><%= condominio.telefone %></td>
+          <td><%= condominio.email %></td>
+          <td>
+            <%= link_to t('.show', :default => t("helpers.links.show")),
+                    tenant_condominio_path(condominio, tenant_id: @tenant.id), :class => 'btn btn-default btn-xs' %>
+            <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                        edit_tenant_condominio_path(condominio, tenant_id: @tenant.id), :class => 'btn btn-default btn-xs' %>
+            <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                        tenant_condominio_path(condominio, tenant_id: @tenant.id),
+                        :method => :delete,
+                        :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                        :class => 'btn btn-xs btn-danger' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p class="lead"> Você ainda não tem condomínios</p>
+<% end %>
+
+<% if (@tenant.can_create_condominios?) %>
+  <%= link_to 'Novo Condominio', new_tenant_condominio_path(tenant_id: @tenant.id),
+            :class => 'btn btn-primary' %>
+<% end %>
