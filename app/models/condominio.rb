@@ -1,6 +1,7 @@
 class Condominio < ApplicationRecord
   belongs_to :tenant
   validates_uniqueness_of :nome
+  has_many :tipo_fornecedors, dependent: :destroy
   validate :free_plan_can_only_have_one_condominio
 
   def free_plan_can_only_have_one_condominio

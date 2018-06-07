@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
 
-
   resources :tenants do
     resources :condominios
+    resources :tipo_fornecedors
   end
   resources :members
   get 'home/index'

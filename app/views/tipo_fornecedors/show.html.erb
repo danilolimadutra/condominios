@@ -1,0 +1,19 @@
+<%- model_class = TipoFornecedor -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:nome) %>:</strong></dt>
+  <dd><%= @tipo_fornecedor.nome %></dd>
+</dl>
+
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              tenant_tipo_fornecedors_path(tenant_id: @tenant.id), :class => 'btn btn-default'  %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_tenant_tipo_fornecedor_path(@tipo_fornecedor, tenant_id: @tenant.id), :class => 'btn btn-default' %>
+<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              tenant_tipo_fornecedor_path(@tipo_fornecedor, tenant_id: @tenant.id),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
