@@ -69,14 +69,4 @@ class CondominiosController < ApplicationController
     def condominio_params
       params.require(:condominio).permit(:nome, :endereco, :sindico, :telefone, :email, :tenant_id)
     end
-
-    def set_tenant
-      @tenant = Tenant.find(params[:tenant_id])
-    end
-
-    def verify_tenant
-      unless params[:tenant_id] == Tenant.current_tenant_id.to_s
-        redirect_to :root, flash: { error: 'Você não possui permissão'}
-      end
-    end
 end

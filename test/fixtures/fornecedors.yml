@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nome: MyString
+  pf: false
+  documento: MyString
+  contato: MyString
+  telefone: MyString
+  email: MyString
+  site: MyString
+  endereco: MyString
+  observacao: MyString
+  tenant: one
+  tipo_fornecedor: one
+
+two:
+  nome: MyString
+  pf: false
+  documento: MyString
+  contato: MyString
+  telefone: MyString
+  email: MyString
+  site: MyString
+  endereco: MyString
+  observacao: MyString
+  tenant: two
+  tipo_fornecedor: two

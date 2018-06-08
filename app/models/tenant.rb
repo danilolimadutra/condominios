@@ -3,6 +3,8 @@ class Tenant < ApplicationRecord
    acts_as_universal_and_determines_tenant
   has_many :members, dependent: :destroy
   has_many :condominios, dependent: :destroy
+  has_many :tipo_fornecedors, dependent: :destroy
+  has_many :fornecedors, dependent: :destroy
 
   def can_create_condominios?
     (plan == 'free' && condominios.count <1) || (plan == 'premium')

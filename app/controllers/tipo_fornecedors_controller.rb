@@ -72,14 +72,4 @@ class TipoFornecedorsController < ApplicationController
     def tipo_fornecedor_params
       params.require(:tipo_fornecedor).permit(:nome, :condominio_id, :tenant_id)
     end
-
-    def set_tenant
-      @tenant = Tenant.find(params[:tenant_id])
-    end
-
-    def verify_tenant
-      unless params[:tenant_id] == Tenant.current_tenant_id.to_s
-        redirect_to :root, flash: { error: 'Você não possui permissão'}
-      end
-    end
 end

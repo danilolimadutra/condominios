@@ -1,3 +1,5 @@
 class TipoFornecedor < ApplicationRecord
-  belongs_to :condominio
+  has_many :fornecedors
+  validates :nome, presence: true, length: { minimum: 2 }
+
 end

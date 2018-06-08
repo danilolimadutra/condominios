@@ -1,0 +1,99 @@
+<%= form_for [@tenant, @fornecedor], :html => { :class => "form-horizontal fornecedor" } do |f| %>
+
+  <% if @fornecedor.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@fornecedor.errors.count, "error") %> prohibited this fornecedor from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @fornecedor.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :tipo_fornecedor_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= select("fornecedor", "tipo_fornecedor_id", Tenant.find(@tenant.id).tipo_fornecedors.all.collect {|f| [ f.nome, f.id ] }, {selected: @fornecedor.tipo_fornecedor_id},  { :class => 'form-control' }) %>
+    </div>
+    <%=f.error_span(:tipo_fornecedor_id) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :nome, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :nome, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:nome) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :pf, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :pf, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:pf) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :documento, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :documento, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:documento) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :contato, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :contato, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:contato) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :telefone, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :telefone, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:telefone) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :email, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :email, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:email) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :site, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :site, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:site) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :endereco, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :endereco, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:endereco) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :observacao, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :observacao, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:observacao) %>
+  </div>
+
+  <%= f.hidden_field :tenant_id, value: params[:tenant_id], :class => 'form-control' %>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                tenant_fornecedors_path(tenant_id: @tenant.id), :class => 'btn btn-default' %>
+    </div>
+  </div>
+
+<% end %>
