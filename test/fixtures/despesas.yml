@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  descricao: MyString
+  data: 2018-06-26
+  valor: 9.99
+  pagamento: MyString
+  observacao: MyString
+  anexo: MyString
+  tenant: one
+  user: one
+  fornecedor: one
+  tipo_despesa: one
+
+two:
+  descricao: MyString
+  data: 2018-06-26
+  valor: 9.99
+  pagamento: MyString
+  observacao: MyString
+  anexo: MyString
+  tenant: two
+  user: two
+  fornecedor: two
+  tipo_despesa: two

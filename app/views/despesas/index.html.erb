@@ -1,0 +1,52 @@
+<%- model_class = Despesa -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:descricao) %></th>
+      <th><%= model_class.human_attribute_name(:data) %></th>
+      <th><%= model_class.human_attribute_name(:valor) %></th>
+      <th><%= model_class.human_attribute_name(:pagamento) %></th>
+      <th><%= model_class.human_attribute_name(:observacao) %></th>
+      <th><%= model_class.human_attribute_name(:anexo) %></th>
+      <th><%= model_class.human_attribute_name(:user_id) %></th>
+      <th><%= model_class.human_attribute_name(:fornecedor_id) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @despesas.each do |despesa| %>
+      <tr>
+        <td><%= despesa.id %></td>
+        <td><%= despesa.descricao %></td>
+        <td><%= despesa.data %></td>
+        <td><%= despesa.valor %></td>
+        <td><%= despesa.pagamento %></td>
+        <td><%= despesa.observacao %></td>
+        <td><%= despesa.anexo %></td>
+        <td><%= despesa.user_id %></td>
+        <td><%= despesa.fornecedor_id %></td>
+        <td><%=l despesa.created_at %></td>
+        <td>
+          <%= link_to t('.show', :default => t("helpers.links.show")),
+                      tenant_despesa_path(despesa, tenant_id: @tenant.id), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_tenant_despesa_path(despesa, tenant_id: @tenant.id), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      tenant_despesa_path(despesa, tenant_id: @tenant.id),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_tenant_despesa_path(tenant_id: @tenant.id),
+            :class => 'btn btn-primary' %>

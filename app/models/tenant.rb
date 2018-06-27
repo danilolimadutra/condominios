@@ -5,6 +5,7 @@ class Tenant < ApplicationRecord
   has_many :condominios, dependent: :destroy
   has_many :tipo_fornecedors, dependent: :destroy
   has_many :fornecedors, dependent: :destroy
+  has_many :despesas, dependent: :destroy
 
   def can_create_condominios?
     (plan == 'free' && condominios.count <1) || (plan == 'premium')

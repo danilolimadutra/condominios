@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180608012804) do
+ActiveRecord::Schema.define(version: 20180627005050) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,23 @@ ActiveRecord::Schema.define(version: 20180608012804) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["tenant_id"], name: "index_condominios_on_tenant_id"
+  end
+
+  create_table "despesas", force: :cascade do |t|
+    t.string "descricao"
+    t.date "data"
+    t.decimal "valor", precision: 8, scale: 2
+    t.string "pagamento"
+    t.string "observacao"
+    t.string "anexo"
+    t.bigint "tenant_id"
+    t.bigint "user_id"
+    t.bigint "fornecedor_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fornecedor_id"], name: "index_despesas_on_fornecedor_id"
+    t.index ["tenant_id"], name: "index_despesas_on_tenant_id"
+    t.index ["user_id"], name: "index_despesas_on_user_id"
   end
 
   create_table "fornecedors", force: :cascade do |t|
@@ -134,6 +151,9 @@ ActiveRecord::Schema.define(version: 20180608012804) do
   end
 
   add_foreign_key "condominios", "tenants"
+  add_foreign_key "despesas", "fornecedors"
+  add_foreign_key "despesas", "tenants"
+  add_foreign_key "despesas", "users"
   add_foreign_key "fornecedors", "tenants"
   add_foreign_key "fornecedors", "tipo_fornecedors"
   add_foreign_key "members", "tenants"
