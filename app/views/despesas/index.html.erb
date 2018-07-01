@@ -7,6 +7,7 @@
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:descricao) %></th>
+      <th><%= model_class.human_attribute_name(:tipo_despesa_id) %></th>
       <th><%= model_class.human_attribute_name(:data) %></th>
       <th><%= model_class.human_attribute_name(:valor) %></th>
       <th><%= model_class.human_attribute_name(:pagamento) %></th>
@@ -23,6 +24,7 @@
       <tr>
         <td><%= despesa.id %></td>
         <td><%= despesa.descricao %></td>
+        <td><%= despesa.tipo_despesa_id %></td>
         <td><%= despesa.data %></td>
         <td><%= despesa.valor %></td>
         <td><%= despesa.pagamento %></td>
