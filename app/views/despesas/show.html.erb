@@ -6,6 +6,8 @@
 <dl class="dl-horizontal">
   <dt><strong><%= model_class.human_attribute_name(:descricao) %>:</strong></dt>
   <dd><%= @despesa.descricao %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:condominio_id) %>:</strong></dt>
+  <dd><%= @despesa.condominio_id %></dd>
   <dt><strong><%= model_class.human_attribute_name(:tipo_despesa_id) %>:</strong></dt>
   <dd><%= @despesa.tipo_despesa_id %></dd>
   <dt><strong><%= model_class.human_attribute_name(:data) %>:</strong></dt>
@@ -27,7 +29,7 @@
 </dl>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),
-              tenant_despesas_path(tenant_id: @tenant.id), :class => 'btn btn-default'  %>
+              condominio_despesas_path(condominio_id: @despesa.condominio_id), :class => 'btn btn-default'  %>
 <%= link_to t('.edit', :default => t("helpers.links.edit")),
               edit_tenant_despesa_path(@despesa, tenant_id: @tenant.id), :class => 'btn btn-default' %>
 <%= link_to t('.destroy', :default => t("helpers.links.destroy")),

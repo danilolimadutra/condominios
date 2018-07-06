@@ -1,12 +1,14 @@
 class DespesasController < ApplicationController
   before_action :set_despesa, only: [:show, :edit, :update, :destroy]
-  before_action :set_tenant, only: [:index, :show, :edit, :update, :destroy, :new, :create]
-  before_action :verify_tenant
+  before_action :set_condominio, only: [:index]
+  before_action :set_tenant, only: [:show, :edit, :update, :destroy, :new, :create]
+  before_action :set_local_tenant, only: [:index]
+  before_action :verify_local_tenant
 
   # GET /despesas
   # GET /despesas.json
   def index
-    @despesas = Despesa.all
+    @despesas = @condominio.despesas
   end
 
   # GET /despesas/1
@@ -31,7 +33,7 @@ class DespesasController < ApplicationController
 
     respond_to do |format|
       if @despesa.save
-        format.html { redirect_to tenant_despesa_path(@despesa, tenant_id: @tenant.id), notice: 'Despesa was successfully created.' }
+        format.html { redirect_to condominio_despesas_path(condominio_id: @despesa.condominio_id), notice: 'Despesa was successfully created.' }
         format.json { render :show, status: :created, location: @despesa }
       else
         format.html { render :new }
@@ -45,7 +47,7 @@ class DespesasController < ApplicationController
   def update
     respond_to do |format|
       if @despesa.update(despesa_params)
-        format.html { redirect_to tenant_despesa_path(@despesa, tenant_id: @tenant.id), notice: 'Despesa was successfully updated.' }
+        format.html { redirect_to condominio_despesas_path(condominio_id: @despesa.condominio_id), notice: 'Despesa was successfully updated.' }
         format.json { render :show, status: :ok, location: @despesa }
       else
         format.html { render :edit }
@@ -59,7 +61,7 @@ class DespesasController < ApplicationController
   def destroy
     @despesa.destroy
     respond_to do |format|
-      format.html { redirect_to tenant_despesas_path(tenant_id: @tenant.id), notice: 'Despesa was successfully destroyed.' }
+      format.html { redirect_to condominio_despesas_path(condominio_id: @despesa.condominio_id), notice: 'Despesa was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -70,8 +72,29 @@ class DespesasController < ApplicationController
       @despesa = Despesa.find(params[:id])
     end
 
+    def set_condominio
+      @condominio = Condominio.find(params[:condominio_id])
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def despesa_params
-      params.require(:despesa).permit(:descricao, :data, :valor, :pagamento, :observacao, :anexo, :tenant_id, :user_id, :fornecedor_id, :tipo_despesa_id)
+      params.require(:despesa).permit(:descricao, :data, :valor, :pagamento, :observacao, :anexo, :tenant_id, :user_id, :fornecedor_id, :tipo_despesa_id, :condominio_id)
     end
+
+    def set_local_tenant
+      @tenant = @condominio.tenant
+    end
+
+    def verify_local_tenant
+      if params[:tenant_id]
+        unless params[:tenant_id] == Tenant.current_tenant_id.to_s
+          redirect_to :root, flash: { error: 'Você não possui permissão'}
+        end
+      else
+        unless @tenant.id.to_s == Tenant.current_tenant_id.to_s
+          redirect_to :root, flash: { error: 'Você não possui permissão'}
+        end
+      end
+    end
+
 end

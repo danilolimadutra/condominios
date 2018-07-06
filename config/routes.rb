@@ -7,6 +7,11 @@ Rails.application.routes.draw do
     resources :tipo_despesas
     resources :despesas
   end
+
+  resources :condominios do
+    resources :despesas
+  end
+
   resources :members
   get 'home/index'
 
