@@ -22,6 +22,7 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administração<span class="caret"></span></a>
               <ul class="dropdown-menu">
+                <li><%= link_to "Formas de pagamentos", tenant_forma_pagamentos_path(tenant_id: @tenant.id) %></li>
                 <li><%= link_to "Fornecedores", tenant_fornecedors_path(tenant_id: @tenant.id) %></li>
                 <li><%= link_to "Tipos de despesas", tenant_tipo_despesas_path(tenant_id: @tenant.id) %></li>
                 <li><%= link_to "Tipos de fornecedores", tenant_tipo_fornecedors_path(tenant_id: @tenant.id) %></li>

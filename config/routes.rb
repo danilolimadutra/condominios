@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :fornecedors
     resources :tipo_despesas
     resources :despesas
+    resources :forma_pagamentos
   end
 
   resources :condominios do

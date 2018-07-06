@@ -1,0 +1,36 @@
+<%= form_for [@tenant, @forma_pagamento], :html => { :class => "form-horizontal forma_pagamento" } do |f| %>
+
+  <% if @forma_pagamento.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@forma_pagamento.errors.count, "error") %> prohibited this forma_pagamento from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @forma_pagamento.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :nome, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :nome, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:nome) %>
+  </div>
+
+  <%= f.hidden_field :tenant_id, value: params[:tenant_id], :class => 'form-control' %>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                tenant_forma_pagamentos_path(tenant_id: @tenant.id), :class => 'btn btn-default' %>
+    </div>
+  </div>
+
+<% end %>

@@ -18,7 +18,9 @@
   <div class="form-group">
     <%= f.label :tipo_fornecedor_id, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= select("fornecedor", "tipo_fornecedor_id", Tenant.find(@tenant.id).tipo_fornecedors.all.collect {|f| [ f.nome, f.id ] }, {selected: @fornecedor.tipo_fornecedor_id},  { :class => 'form-control' }) %>
+      <%= select("fornecedor", "tipo_fornecedor_id",
+                    Tenant.find(@tenant.id).tipo_fornecedors.all.order(nome: :asc).collect {|f| [ f.nome, f.id ] },
+                    {selected: @fornecedor.tipo_fornecedor_id},  { :class => 'form-control' }) %>
     </div>
     <%=f.error_span(:tipo_fornecedor_id) %>
   </div>
