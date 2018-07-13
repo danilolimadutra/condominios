@@ -15,7 +15,7 @@
   <dt><strong><%= model_class.human_attribute_name(:forma_pagamento) %>:</strong></dt>
   <dd><%= @despesa.forma_pagamento_id %></dd>
   <dt><strong><%= model_class.human_attribute_name(:valor) %>:</strong></dt>
-  <dd><%= @despesa.valor %></dd>
+  <dd><%= number_to_currency(@despesa.valor, unit: "R$ ", separator: ",", delimiter: ".", precision: 2) %></dd>
   <dt><strong><%= model_class.human_attribute_name(:observacao) %>:</strong></dt>
   <dd><%= @despesa.observacao %></dd>
   <dt><strong><%= model_class.human_attribute_name(:anexo) %>:</strong></dt>
