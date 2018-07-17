@@ -1,0 +1,13 @@
+en:
+  activerecord:
+    models:
+      condominio:
+        one: Condominium
+        other: Condominiums
+    attributes:
+      condominio:
+        nome: Name
+        endereco: Address
+        sindico: "Apartment manager"
+        telefone: Telephone
+        email: Email

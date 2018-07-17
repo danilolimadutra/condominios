@@ -8,7 +8,7 @@ Bundler.require(*Rails.groups)
 
 module Condominios
   class Application < Rails::Application
-
+    config.i18n.default_locale = 'pt-BR'
     # uncomment to ensure a common layout for devise forms
     #   config.to_prepare do   # Devise
     #     Devise::SessionsController.layout "sign"

@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      condominio:
+        one: Condomínio
+        other: Condomínios
+    attributes:
+      condominio:
+        nome: Nome
+        endereco: Endereço
+        sindico: Síndico
+        telefone: Telefone
+        email: Email
