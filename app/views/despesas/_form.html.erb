@@ -1,107 +1,106 @@
-<%= form_for [@tenant, @despesa], :html => { :class => "form-horizontal despesa" } do |f| %>
+<%= form_for [@tenant, @despesa], :html => { multipart: true, :class => "form-horizontal despesa" } do |f| %>
 
-  <% if @despesa.errors.any? %>
-    <div id="error_expl" class="panel panel-danger">
-      <div class="panel-heading">
-        <h3 class="panel-title"><%= pluralize(@despesa.errors.count, "error") %> prohibited this despesa from being saved:</h3>
-      </div>
-      <div class="panel-body">
-        <ul>
+<% if @despesa.errors.any? %>
+  <div id="error_expl" class="panel panel-danger">
+    <div class="panel-heading">
+      <h3 class="panel-title"><%= pluralize(@despesa.errors.count, "error") %>
+        prohibited this despesa from being saved:</h3>
+    </div>
+    <div class="panel-body">
+      <ul>
         <% @despesa.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
         <% end %>
-        </ul>
-      </div>
+      </ul>
     </div>
-  <% end %>
+  </div>
+<% end %>
 
-  <div class="form-group">
-    <%= f.label :descricao, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :descricao, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:descricao) %>
+<div class="form-group">
+  <%= f.label :descricao, :class => 'control-label col-lg-2' %>
+  <div class="col-lg-10">
+    <%= f.text_field :descricao, :class => 'form-control' %>
   </div>
-  <div class="form-group">
-    <%= f.label :condominio_id, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= select("despesa", "condominio_id",
-                    Tenant.find(@tenant.id).condominios.all.order(nome: :asc).collect {|f| [ f.nome, f.id ] },
-                    {selected: @despesa.condominio_id},  { :class => 'form-control' }) %>
-    </div>
-    <%=f.error_span(:condominio_id) %>
+  <%=f.error_span(:descricao) %>
+</div>
+<div class="form-group">
+  <%= f.label :condominio_id, :class => 'control-label col-lg-2' %>
+  <div class="col-lg-10">
+    <%= select("despesa", "condominio_id", Tenant.find(@tenant.id).condominios.all.order(nome: :asc).collect {|f| [ f.nome, f.id ] }, {selected: @despesa.condominio_id}, { :class => 'form-control' }) %>
   </div>
-  <div class="form-group">
-    <%= f.label :tipo_despesa_id, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= select("despesa", "tipo_despesa_id",
-                    Tenant.find(@tenant.id).tipo_despesas.all.order(nome: :asc).collect {|f| [ f.nome, f.id ] },
-                    {selected: @despesa.tipo_despesa_id},  { :class => 'form-control' }) %>
-    </div>
-    <%=f.error_span(:tipo_despesa_id) %>
+  <%=f.error_span(:condominio_id) %>
+</div>
+<div class="form-group">
+  <%= f.label :tipo_despesa_id, :class => 'control-label col-lg-2' %>
+  <div class="col-lg-10">
+    <%= select("despesa", "tipo_despesa_id", Tenant.find(@tenant.id).tipo_despesas.all.order(nome: :asc).collect {|f| [ f.nome, f.id ] }, {selected: @despesa.tipo_despesa_id}, { :class => 'form-control' }) %>
   </div>
-  <div class="form-group">
-    <%= f.label :fornecedor_id, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= select("despesa", "fornecedor_id",
-                    Tenant.find(@tenant.id).fornecedors.all.order(nome: :asc).collect {|f| [ f.nome, f.id ] },
-                    {selected: @despesa.fornecedor_id},  { :class => 'form-control' }) %>
-    </div>
-    <%=f.error_span(:fornecedor_id) %>
+  <%=f.error_span(:tipo_despesa_id) %>
+</div>
+<div class="form-group">
+  <%= f.label :fornecedor_id, :class => 'control-label col-lg-2' %>
+  <div class="col-lg-10">
+    <%= select("despesa", "fornecedor_id", Tenant.find(@tenant.id).fornecedors.all.order(nome: :asc).collect {|f| [ f.nome, f.id ] }, {selected: @despesa.fornecedor_id}, { :class => 'form-control' }) %>
   </div>
-  <div class="form-group">
-    <%= f.label :data, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.date_field :data, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:data) %>
+  <%=f.error_span(:fornecedor_id) %>
+</div>
+<div class="form-group">
+  <%= f.label :data, :class => 'control-label col-lg-2' %>
+  <div class="col-lg-10">
+    <%= f.date_field :data, :class => 'form-control' %>
   </div>
-  <div class="form-group">
-    <%= f.label :forma_pagamento_id, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= select("despesa", "forma_pagamento_id",
-                    Tenant.find(@tenant.id).forma_pagamentos.all.order(nome: :asc).collect {|f| [ f.nome, f.id ] },
-                    {selected: @despesa.forma_pagamento_id},  { :class => 'form-control' }) %>
-    </div>
-    <%=f.error_span(:fornecedor_id) %>
+  <%=f.error_span(:data) %>
+</div>
+<div class="form-group">
+  <%= f.label :forma_pagamento_id, :class => 'control-label col-lg-2' %>
+  <div class="col-lg-10">
+    <%= select("despesa", "forma_pagamento_id", Tenant.find(@tenant.id).forma_pagamentos.all.order(nome: :asc).collect {|f| [ f.nome, f.id ] }, {selected: @despesa.forma_pagamento_id}, { :class => 'form-control' }) %>
   </div>
-  <div class="form-group">
-    <%= f.label :valor, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :valor, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:valor) %>
+  <%=f.error_span(:fornecedor_id) %>
+</div>
+<div class="form-group">
+  <%= f.label :valor, :class => 'control-label col-lg-2' %>
+  <div class="col-lg-10">
+    <%= f.number_field :valor, :class => 'form-control', step: :any %>
   </div>
-  <div class="form-group">
-    <%= f.label :observacao, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :observacao, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:observacao) %>
+  <%=f.error_span(:valor) %>
+</div>
+<div class="form-group">
+  <%= f.label :observacao, :class => 'control-label col-lg-2' %>
+  <div class="col-lg-10">
+    <%= f.text_field :observacao, :class => 'form-control' %>
   </div>
-  <div class="form-group">
-    <%= f.label :anexo, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :anexo, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:anexo) %>
+  <%=f.error_span(:observacao) %>
+</div>
+<div class="form-group">
+  <%= f.label :anexo, :class => 'control-label col-lg-2' %>
+  <div class="col-lg-10">
+    <%= f.file_field :anexo %>
   </div>
+  <%=f.error_span(:anexo) %>
+</div>
 
-  <%= f.hidden_field :tenant_id, value: params[:tenant_id], :class => 'form-control' %>
+<%= f.hidden_field :tenant_id, value: params[:tenant_id], :class => 'form-control' %>
 
+<div class="form-group">
+  <div class="col-lg-offset-2 col-lg-10">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
 
-  <div class="form-group">
-    <div class="col-lg-offset-2 col-lg-10">
-      <%= f.submit nil, :class => 'btn btn-primary' %>
-
-      <% if @despesa.condominio_id %>
-        <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                  condominio_despesas_path(condominio_id: @despesa.condominio_id), :class => 'btn btn-default' %>
-      <% else %>
-        <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                  root_path, :class => 'btn btn-default' %>
-      <% end %>
-    </div>
+    <% if @despesa.condominio_id %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")), condominio_despesas_path(condominio_id: @despesa.condominio_id), :class => 'btn btn-default' %>
+    <% else %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")), root_path, :class => 'btn btn-default' %>
+    <% end %>
   </div>
+</div>
 
 <% end %>
+
+<script type="text/javascript">
+  $('#despesa_anexo').bind('change', function () {
+    var size_in_megabytes = this.files[0].size / 1024 / 1024;
+    if (size_in_megabytes > 2) {
+      alert('Tamanho máximo permitido para o anexo é 2MB.');
+    }
+  });
+</script>

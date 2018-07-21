@@ -19,7 +19,7 @@
   <dt><strong><%= model_class.human_attribute_name(:observacao) %>:</strong></dt>
   <dd><%= @despesa.observacao %></dd>
   <dt><strong><%= model_class.human_attribute_name(:anexo) %>:</strong></dt>
-  <dd><%= @despesa.anexo %></dd>
+  <dd><%= image_tag @despesa.anexo.url if @despesa.anexo? %></dd>
   <dt><strong><%= model_class.human_attribute_name(:tenant_id) %>:</strong></dt>
   <dd><%= @despesa.tenant_id %></dd>
   <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>

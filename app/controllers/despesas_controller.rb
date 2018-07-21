@@ -30,7 +30,7 @@ class DespesasController < ApplicationController
   def create
     @despesa = Despesa.new(despesa_params)
     @despesa.user_id = current_user.id
-    @despesa.valor = format_valor
+    #@despesa.valor = format_valor
 
     respond_to do |format|
       if @despesa.save
@@ -48,11 +48,11 @@ class DespesasController < ApplicationController
   def update
 
     #format_number
-    params_update = despesa_params
-    params_update[:valor] = format_valor
+    #params_update = despesa_params
+    #params_update[:valor] = format_valor
 
     respond_to do |format|
-      if @despesa.update(params_update)
+      if @despesa.update(despesa_params)
         format.html { redirect_to condominio_despesas_path(condominio_id: @despesa.condominio_id), notice: 'Despesa was successfully updated.' }
         format.json { render :show, status: :ok, location: @despesa }
       else

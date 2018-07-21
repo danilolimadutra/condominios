@@ -13,6 +13,10 @@ gem 'pg', '>= 0.18', '< 2.0'
 
 gem 'flag-icons-rails'
 gem 'materializecss'
+gem 'carrierwave'
+
+gem 'mini_magick'
+gem 'fog'
 
 gem 'devise'
 gem 'milia', '~>1.3'
