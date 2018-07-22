@@ -16,7 +16,7 @@ gem 'materializecss'
 gem 'carrierwave'
 
 gem 'mini_magick'
-gem 'fog'
+gem 'fog-aws'
 
 gem 'devise'
 gem 'milia', '~>1.3'
