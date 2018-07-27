@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180706015757) do
+ActiveRecord::Schema.define(version: 20180727001325) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,14 @@ ActiveRecord::Schema.define(version: 20180706015757) do
     t.index ["tipo_fornecedor_id"], name: "index_fornecedors_on_tipo_fornecedor_id"
   end
 
+  create_table "income_tipes", force: :cascade do |t|
+    t.string "name"
+    t.bigint "tenant_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tenant_id"], name: "index_income_tipes_on_tenant_id"
+  end
+
   create_table "members", force: :cascade do |t|
     t.bigint "tenant_id"
     t.bigint "user_id"
@@ -102,6 +110,14 @@ ActiveRecord::Schema.define(version: 20180706015757) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_models_on_email", unique: true
     t.index ["reset_password_token"], name: "index_models_on_reset_password_token", unique: true
+  end
+
+  create_table "new_incomes", force: :cascade do |t|
+    t.string "name"
+    t.bigint "tenant_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tenant_id"], name: "index_new_incomes_on_tenant_id"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -147,6 +163,22 @@ ActiveRecord::Schema.define(version: 20180706015757) do
     t.index ["tenant_id"], name: "index_tipo_fornecedors_on_tenant_id"
   end
 
+  create_table "tipo_receita", force: :cascade do |t|
+    t.string "name"
+    t.bigint "tenant_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tenant_id"], name: "index_tipo_receita_on_tenant_id"
+  end
+
+  create_table "tipo_receitas", force: :cascade do |t|
+    t.string "name"
+    t.bigint "tenant_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tenant_id"], name: "index_tipo_receitas_on_tenant_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -182,10 +214,14 @@ ActiveRecord::Schema.define(version: 20180706015757) do
   add_foreign_key "forma_pagamentos", "tenants"
   add_foreign_key "fornecedors", "tenants"
   add_foreign_key "fornecedors", "tipo_fornecedors"
+  add_foreign_key "income_tipes", "tenants"
   add_foreign_key "members", "tenants"
   add_foreign_key "members", "users"
+  add_foreign_key "new_incomes", "tenants"
   add_foreign_key "tenants", "tenants"
   add_foreign_key "tipo_despesas", "tenants"
   add_foreign_key "tipo_fornecedors", "condominios"
   add_foreign_key "tipo_fornecedors", "tenants"
+  add_foreign_key "tipo_receita", "tenants"
+  add_foreign_key "tipo_receitas", "tenants"
 end
