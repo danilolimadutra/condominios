@@ -26,6 +26,8 @@
                 <li><%= link_to "Fornecedores", tenant_fornecedors_path(tenant_id: @tenant.id) %></li>
                 <li><%= link_to "Tipos de despesas", tenant_tipo_despesas_path(tenant_id: @tenant.id) %></li>
                 <li><%= link_to "Tipos de fornecedores", tenant_tipo_fornecedors_path(tenant_id: @tenant.id) %></li>
+                <li><%= link_to "Tipos de receitas", tenant_income_tipes_path(tenant_id: @tenant.id) %></li>
+
               </ul>
             </li>
         <% end %>
@@ -51,7 +53,7 @@
       <a href="<%= request.path %>?locale=pt-BR">
         <span class="flag-icon flag-icon-br"></span>
       </a>
-      
+
     </div>
   </div>
 </div>

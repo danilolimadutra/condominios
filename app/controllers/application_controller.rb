@@ -24,4 +24,12 @@ class ApplicationController < ActionController::Base
     session[:locale] = params[:locale] if params[:locale].present?
     I18n.locale = session[:locale] || I18n.default_locale
   end
+
+  def set_condominio
+    @condominio = Condominio.find(params[:condominio_id])
+  end
+
+  def set_tenant_by_condominio
+    @tenant = @condominio.tenant
+  end
 end

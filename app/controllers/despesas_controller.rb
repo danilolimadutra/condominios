@@ -2,7 +2,7 @@ class DespesasController < ApplicationController
   before_action :set_despesa, only: [:show, :edit, :update, :destroy]
   before_action :set_condominio, only: [:index]
   before_action :set_tenant, only: [:show, :edit, :update, :destroy, :new, :create]
-  before_action :set_local_tenant, only: [:index]
+  before_action :set_tenant_by_condominio, only: [:index]
   before_action :verify_local_tenant
 
   # GET /despesas
@@ -78,17 +78,9 @@ class DespesasController < ApplicationController
       @despesa = Despesa.find(params[:id])
     end
 
-    def set_condominio
-      @condominio = Condominio.find(params[:condominio_id])
-    end
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def despesa_params
       params.require(:despesa).permit(:descricao, :data, :valor, :observacao, :anexo, :tenant_id, :user_id, :fornecedor_id, :tipo_despesa_id, :condominio_id, :forma_pagamento_id)
-    end
-
-    def set_local_tenant
-      @tenant = @condominio.tenant
     end
 
     def verify_local_tenant

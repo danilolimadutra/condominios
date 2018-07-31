@@ -1,0 +1,85 @@
+<%= form_for [@tenant, @apartment], :html => { :class => "form-horizontal apartment" } do |f| %>
+
+  <% if @apartment.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@apartment.errors.count, "error") %> prohibited this apartment from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @apartment.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :condominio_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= select("apartment", "condominio_id", Tenant.find(@tenant.id).condominios.all.order(nome: :asc).collect {|f| [ f.nome, f.id ] },
+            {selected: @apartment.condominio_id}, { :class => 'form-control' }) %>
+    </div>
+    <%=f.error_span(:condominio_id) %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :number, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :number, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:number) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :floor, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :floor, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:floor) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :block, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :block, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:block) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :dweller, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :dweller, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:dweller) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :fone, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :fone, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:fone) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :email, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :email, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:email) %>
+  </div>
+
+  <%= f.hidden_field :tenant_id, value: params[:tenant_id], :class => 'form-control' %>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+
+      <% if @apartment.condominio_id %>
+        <%= link_to t('.cancel', :default => t("helpers.links.cancel")), condominio_apartments_path(condominio_id: @apartment.condominio_id), :class => 'btn btn-default' %>
+      <% else %>
+        <%= link_to t('.cancel', :default => t("helpers.links.cancel")), root_path, :class => 'btn btn-default' %>
+      <% end %>
+
+    </div>
+  </div>
+
+<% end %>

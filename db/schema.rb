@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180727001325) do
+ActiveRecord::Schema.define(version: 20180731004252) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "apartments", force: :cascade do |t|
+    t.string "number"
+    t.string "floor"
+    t.string "block"
+    t.string "dweller"
+    t.string "fone"
+    t.string "email"
+    t.bigint "tenant_id"
+    t.bigint "condominio_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["condominio_id"], name: "index_apartments_on_condominio_id"
+    t.index ["tenant_id"], name: "index_apartments_on_tenant_id"
+  end
 
   create_table "condominios", force: :cascade do |t|
     t.string "nome"
@@ -204,6 +219,8 @@ ActiveRecord::Schema.define(version: 20180727001325) do
     t.index ["tenant_id"], name: "index_users_on_tenant_id"
   end
 
+  add_foreign_key "apartments", "condominios"
+  add_foreign_key "apartments", "tenants"
   add_foreign_key "condominios", "tenants"
   add_foreign_key "despesas", "condominios"
   add_foreign_key "despesas", "forma_pagamentos"

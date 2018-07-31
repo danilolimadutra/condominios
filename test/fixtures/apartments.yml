@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  number: MyString
+  floor: MyString
+  block: MyString
+  dweller: MyString
+  fone: MyString
+  email: MyString
+  tenant: one
+  condominio: one
+
+two:
+  number: MyString
+  floor: MyString
+  block: MyString
+  dweller: MyString
+  fone: MyString
+  email: MyString
+  tenant: two
+  condominio: two
