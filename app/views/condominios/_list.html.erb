@@ -24,6 +24,7 @@
           <td><%= condominio.telefone %></td>
           <td><%= condominio.email %></td>
           <td>
+            <%= link_to 'Apartamentos', condominio_apartments_path(condominio_id: condominio.id), :class => 'btn btn-default btn-xs' %>
             <%= link_to 'Despesas', condominio_despesas_path(condominio_id: condominio.id), :class => 'btn btn-default btn-xs' %>
             <%= link_to t('.show', :default => t("helpers.links.show")),
                     tenant_condominio_path(condominio, tenant_id: @tenant.id), :class => 'btn btn-default btn-xs' %>
