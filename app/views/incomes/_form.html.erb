@@ -1,0 +1,78 @@
+<%= form_for [@tenant, @income], :html => { :class => "form-horizontal income" } do |f| %>
+
+  <% if @income.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@income.errors.count, "error") %> prohibited this income from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @income.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :condominio_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= select("income", "condominio_id", Tenant.find(@tenant.id).condominios.all.order(nome: :asc).collect {|f| [ f.nome, f.id ] },
+                  {selected: @income.condominio_id}, { :class => 'form-control' }) %>
+    </div>
+    <%=f.error_span(:condominio_id) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :income_tipe_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= select("income", "income_tipe_id", Tenant.find(@tenant.id).income_tipes.all.order(name: :asc).collect {|f| [ f.name, f.id ] },
+                  {selected: @income.income_tipe_id}, { :class => 'form-control' }) %>
+    </div>
+    <%=f.error_span(:income_tipe_id) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :apartment_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= select("income", "apartment_id", Tenant.find(@tenant.id).apartments.all.order(number: :asc).collect {|f| [ f.number, f.id ] },
+                  {selected: @income.apartment_id}, { :class => 'form-control' }) %>
+    </div>
+    <%=f.error_span(:apartment_id) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :forma_pagamento_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= select("income", "forma_pagamento_id", Tenant.find(@tenant.id).forma_pagamentos.all.order(nome: :asc).collect {|f| [ f.nome, f.id ] },
+                  {selected: @income.forma_pagamento_id}, { :class => 'form-control' }) %>
+    </div>
+    <%=f.error_span(:forma_pagamento_id) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :date, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.date_field :date, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:date) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :payment, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.number_field :payment, :class => 'form-control', step: :any %>
+    </div>
+    <%=f.error_span(:payment) %>
+  </div>
+
+  <%= f.hidden_field :tenant_id, value: params[:tenant_id], :class => 'form-control' %>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <% if @income.condominio_id %>
+        <%= link_to t('.cancel', :default => t("helpers.links.cancel")), condominio_incomes_path(condominio_id: @income.condominio_id), :class => 'btn btn-default' %>
+      <% else %>
+        <%= link_to t('.cancel', :default => t("helpers.links.cancel")), root_path, :class => 'btn btn-default' %>
+      <% end %>
+    </div>
+  </div>
+
+<% end %>

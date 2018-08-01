@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180731004252) do
+ActiveRecord::Schema.define(version: 20180801002542) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,6 +97,23 @@ ActiveRecord::Schema.define(version: 20180731004252) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["tenant_id"], name: "index_income_tipes_on_tenant_id"
+  end
+
+  create_table "incomes", force: :cascade do |t|
+    t.bigint "tenant_id"
+    t.bigint "condominio_id"
+    t.bigint "income_tipe_id"
+    t.bigint "apartment_id"
+    t.bigint "forma_pagamento_id"
+    t.date "date"
+    t.decimal "payment", precision: 8, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["apartment_id"], name: "index_incomes_on_apartment_id"
+    t.index ["condominio_id"], name: "index_incomes_on_condominio_id"
+    t.index ["forma_pagamento_id"], name: "index_incomes_on_forma_pagamento_id"
+    t.index ["income_tipe_id"], name: "index_incomes_on_income_tipe_id"
+    t.index ["tenant_id"], name: "index_incomes_on_tenant_id"
   end
 
   create_table "members", force: :cascade do |t|
@@ -232,6 +249,11 @@ ActiveRecord::Schema.define(version: 20180731004252) do
   add_foreign_key "fornecedors", "tenants"
   add_foreign_key "fornecedors", "tipo_fornecedors"
   add_foreign_key "income_tipes", "tenants"
+  add_foreign_key "incomes", "apartments"
+  add_foreign_key "incomes", "condominios"
+  add_foreign_key "incomes", "forma_pagamentos"
+  add_foreign_key "incomes", "income_tipes"
+  add_foreign_key "incomes", "tenants"
   add_foreign_key "members", "tenants"
   add_foreign_key "members", "users"
   add_foreign_key "new_incomes", "tenants"

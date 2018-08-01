@@ -9,11 +9,13 @@ Rails.application.routes.draw do
     resources :forma_pagamentos
     resources :income_tipes
     resources :apartments
+    resources :incomes
   end
 
   resources :condominios do
     resources :despesas
     resources :apartments
+    resources :incomes
   end
 
   resources :members

@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  tenant: one
+  condominio: one
+  income_tipe: one
+  apartment: one
+  forma_pagamento: one
+  date: 2018-07-31
+  payment: 
+
+two:
+  tenant: two
+  condominio: two
+  income_tipe: two
+  apartment: two
+  forma_pagamento: two
+  date: 2018-07-31
+  payment: 

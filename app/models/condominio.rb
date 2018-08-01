@@ -4,6 +4,7 @@ class Condominio < ApplicationRecord
   has_many :tipo_fornecedors, dependent: :destroy
   has_many :despesas, dependent: :destroy
   has_many :apartments, dependent: :destroy
+  has_many :incomes, dependent: :destroy
   validate :free_plan_can_only_have_one_condominio
 
   def free_plan_can_only_have_one_condominio

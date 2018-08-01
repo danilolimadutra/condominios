@@ -1,0 +1,31 @@
+<%- model_class = Income -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:tenant_id) %>:</strong></dt>
+  <dd><%= @income.tenant_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:condominio_id) %>:</strong></dt>
+  <dd><%= @income.condominio_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:income_tipe_id) %>:</strong></dt>
+  <dd><%= @income.income_tipe_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:apartment_id) %>:</strong></dt>
+  <dd><%= @income.apartment_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:forma_pagamento_id) %>:</strong></dt>
+  <dd><%= @income.forma_pagamento_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:date) %>:</strong></dt>
+  <dd><%= @income.date %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:payment) %>:</strong></dt>
+  <dd><%= @income.payment %></dd>
+</dl>
+
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              condominio_incomes_path(condominio_id: @income.condominio_id), :class => 'btn btn-default'  %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_tenant_income_path(@income, tenant_id: @income.tenant_id), :class => 'btn btn-default' %>
+<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              tenant_income_path(@income, tenant_id: @income.tenant_id),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>

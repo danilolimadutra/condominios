@@ -9,6 +9,8 @@ class Tenant < ApplicationRecord
   has_many :despesas, dependent: :destroy
   has_many :forma_pagamentos, dependent: :destroy
   has_many :income_tipes, dependent: :destroy
+  has_many :apartments, dependent: :destroy
+  has_many :incomes, dependent: :destroy
 
   def can_create_condominios?
     (plan == 'free' && condominios.count <2) || (plan == 'premium')
